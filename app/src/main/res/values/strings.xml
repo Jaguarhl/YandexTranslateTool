@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Yandex Translate Tool</string>
+    <!-- hints -->
+    <string name="hint_enter_word">Please enter word or sentence to translate...</string>
+    <!-- errors message -->
+    <string name="error_something_went_wrong">Something went wrong. Please try again or write to author.</string>
+    <!-- messages -->
+    <string name="message_no_translation">Text do not have translation</string>
+</resources>
