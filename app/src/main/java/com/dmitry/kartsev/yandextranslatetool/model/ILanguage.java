@@ -1,8 +1,6 @@
 package com.dmitry.kartsev.yandextranslatetool.model;
 
-import com.dmitry.kartsev.yandextranslatetool.model.pojo.LanguageDetected;
-
-import java.util.List;
+import com.dmitry.kartsev.yandextranslatetool.model.dto.LanguageDetectedDTO;
 
 import rx.Observable;
 
@@ -11,5 +9,5 @@ import rx.Observable;
  */
 
 public interface ILanguage {
-    Observable<LanguageDetected> getDetectedLanguage(String textToDetect);
+    Observable<LanguageDetectedDTO> getDetectedLanguage(String textToDetect);
 }

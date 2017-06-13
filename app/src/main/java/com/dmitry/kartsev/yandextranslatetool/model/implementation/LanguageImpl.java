@@ -1,12 +1,11 @@
 package com.dmitry.kartsev.yandextranslatetool.model.implementation;
 
 import com.dmitry.kartsev.yandextranslatetool.model.ILanguage;
-import com.dmitry.kartsev.yandextranslatetool.model.pojo.LanguageDetected;
+import com.dmitry.kartsev.yandextranslatetool.model.dto.LanguageDetectedDTO;
 import com.dmitry.kartsev.yandextranslatetool.model.rest.ApiClient;
 import com.dmitry.kartsev.yandextranslatetool.model.rest.ApiInterface;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import rx.Observable;
@@ -21,7 +20,7 @@ public class LanguageImpl implements ILanguage {
     ApiInterface apiService = ApiClient.getClient();
 
     @Override
-    public Observable<LanguageDetected> getDetectedLanguage(String textToDetect) {
+    public Observable<LanguageDetectedDTO> getDetectedLanguage(String textToDetect) {
         Map<String, String> map = new HashMap<>();
         map.put(ApiClient.PARAM_KEY, ApiClient.API_KEY);
         map.put(ApiClient.PARAM_TEXT, textToDetect);

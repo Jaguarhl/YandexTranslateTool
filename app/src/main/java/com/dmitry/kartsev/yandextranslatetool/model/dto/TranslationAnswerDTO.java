@@ -1,9 +1,10 @@
-package com.dmitry.kartsev.yandextranslatetool.model.pojo;
+package com.dmitry.kartsev.yandextranslatetool.model.dto;
 
+import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class LanguageDetected {
+public class TranslationAnswerDTO {
 
     @SerializedName("code")
     @Expose
@@ -11,6 +12,9 @@ public class LanguageDetected {
     @SerializedName("lang")
     @Expose
     private String lang;
+    @SerializedName("text")
+    @Expose
+    private List<String> text = null;
 
     public Integer getCode() {
         return code;
@@ -26,6 +30,14 @@ public class LanguageDetected {
 
     public void setLang(String lang) {
         this.lang = lang;
+    }
+
+    public List<String> getText() {
+        return text;
+    }
+
+    public void setText(List<String> text) {
+        this.text = text;
     }
 
 }

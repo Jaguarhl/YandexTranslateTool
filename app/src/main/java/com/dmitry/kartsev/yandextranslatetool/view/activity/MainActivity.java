@@ -10,10 +10,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dmitry.kartsev.yandextranslatetool.R;
-import com.dmitry.kartsev.yandextranslatetool.model.pojo.TranslationAnswer;
+import com.dmitry.kartsev.yandextranslatetool.model.dto.TranslationAnswerDTO;
 import com.dmitry.kartsev.yandextranslatetool.presenter.IPresenter;
 import com.dmitry.kartsev.yandextranslatetool.presenter.implementation.TranslationPresenter;
+import com.dmitry.kartsev.yandextranslatetool.presenter.vo.Languages;
 import com.dmitry.kartsev.yandextranslatetool.view.IView;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -27,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements IView{
     @Bind(R.id.textTranslationVariants)
     TextView textTranslationVariants;
     private IPresenter presenter;
+    private Languages languages;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +42,7 @@ public class MainActivity extends AppCompatActivity implements IView{
 
         initEditTextBehaviour();
         presenter = new TranslationPresenter(this);
+        presenter.getLanguagesList();
     }
 
     @Override
@@ -57,14 +64,6 @@ public class MainActivity extends AppCompatActivity implements IView{
                     final String strTemporary = editToTranslate.getText().toString();
                     // getting entered text language automatically
 
-//                    // получим язык текста
-//                    Map<String, String> mapLanguageFromJson = new HashMap<>();
-//                    mapLanguageFromJson.put(ApiClient.PARAM_KEY, ApiClient.API_KEY);
-//                    mapLanguageFromJson.put(ApiClient.PARAM_TEXT, strTemporary);
-//
-//                    getInputWordsLanguage(mapLanguageFromJson, strTemporary);
-
-
                     makeToast(strTemporary, Toast.LENGTH_SHORT);
                     presenter.translateText();
                     return true;
@@ -73,62 +72,6 @@ public class MainActivity extends AppCompatActivity implements IView{
             }
         });
     }
-
-    /*private void getInputWordsLanguage(Map<String, String> mapLanguageFromJson,
-                                       final String strInput) {
-        Call<LanguageDetected> callForLngDetect = apiService.detectLanguage(mapLanguageFromJson);
-
-        callForLngDetect.enqueue(new Callback<LanguageDetected>() {
-            @Override
-            public void onResponse(Call<LanguageDetected> call, Response<LanguageDetected> response) {
-                Log.d(LOG_TAG, response.body().getCode().toString() + " " +
-                        response.body().getLang());
-                if(response.body().getCode().equals(ApiClient.ANSWER_CODE_OK)) {
-                    Log.d(LOG_TAG, "Detected language is " + response.body().getLang());
-                    Map<String, String> mapJsonToTranslate = new HashMap<>();
-                    mapJsonToTranslate.put(ApiClient.PARAM_KEY, ApiClient.API_KEY);
-                    mapJsonToTranslate.put(ApiClient.PARAM_TEXT, strInput);
-//                    mapJsonToTranslate.put(ApiClient.PARAM_LANG, response.body().getLang() + "-" +
-//                            LanguageToTranslate);
-
-                    getTranslatedText(mapJsonToTranslate);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<LanguageDetected> call, Throwable t) {
-                t.printStackTrace();
-                Toast.makeText(getApplicationContext(),
-                        getResources().getText(R.string.error_something_went_wrong),
-                        Toast.LENGTH_LONG).show();
-            }
-        });
-    }
-
-    private void getTranslatedText(Map<String, String> mapJsonToTranslate) {
-        Call<DictionaryAnswer> callTranslate = apiService.translateFull(mapJsonToTranslate);
-
-        callTranslate.enqueue(new Callback<DictionaryAnswer>() {
-            @Override
-            public void onResponse(Call<DictionaryAnswer> call,
-                                   Response<DictionaryAnswer> response) {
-                Log.d(LOG_TAG,response.body().getDef().get(0).toString()/* + " " + response.body()
-                        .getLang() + response.body().getText()*///);
-                /*if(response.body().getCode().equals(ApiClient.ANSWER_CODE_OK)) {
-                    String answer = "";
-                    for (int i = 0; i < response.body().getText().size(); i++) {
-                        answer += response.body().getText().get(i) + "\n";
-                    }
-                    textTranslationVariants.setText(answer);
-                }*//*
-            }
-
-            @Override
-            public void onFailure(Call<DictionaryAnswer> call, Throwable t) {
-                t.printStackTrace();
-            }
-        });
-    }*/
 
     @Override
     public String getTextToTranslate() {
@@ -142,13 +85,25 @@ public class MainActivity extends AppCompatActivity implements IView{
     }
 
     @Override
+    public void setLanguagesList(Languages languages) {
+        this.languages = languages;
+        Log.d(LOG_TAG, "Languages set^ " + languages.toString());
+    }
+
+    @Override
     public void showError(String errMessage) {
         makeToast(errMessage, Toast.LENGTH_LONG);
     }
 
     @Override
-    public void showTranslation(TranslationAnswer translationAnswer) {
-        textTranslationVariants.setText(translationAnswer.getText().toString());
+    public void showTranslation(TranslationAnswerDTO translationAnswerDTO) {
+        String[] temp = translationAnswerDTO.getLang().toString().split("-");
+        Log.d(LOG_TAG, "temp is: " + temp[0] + " " + temp[1]);
+        String languageDirection = languages.getLanguages().get(temp[0]) + " "
+                + this.getResources().getString(R.string.direction_symbol) + " "
+                + languages.getLanguages().get(temp[1]);
+        this.setTitle(languageDirection);
+        textTranslationVariants.setText(translationAnswerDTO.getText().toString());
     }
 
     @Override

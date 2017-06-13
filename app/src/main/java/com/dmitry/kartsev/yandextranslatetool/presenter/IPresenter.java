@@ -6,6 +6,7 @@ package com.dmitry.kartsev.yandextranslatetool.presenter;
 
 public interface IPresenter {
     void setLanguageFrom(String language);
+    void getLanguagesList();
     void translateText();
     void onStop();
 }

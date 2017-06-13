@@ -3,12 +3,11 @@ package com.dmitry.kartsev.yandextranslatetool.model.implementation;
 import android.util.Log;
 
 import com.dmitry.kartsev.yandextranslatetool.model.ITranslation;
-import com.dmitry.kartsev.yandextranslatetool.model.pojo.TranslationAnswer;
+import com.dmitry.kartsev.yandextranslatetool.model.dto.TranslationAnswerDTO;
 import com.dmitry.kartsev.yandextranslatetool.model.rest.ApiClient;
 import com.dmitry.kartsev.yandextranslatetool.model.rest.ApiInterface;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import rx.Observable;
@@ -25,7 +24,7 @@ public class TranslationImpl implements ITranslation {
     ApiInterface apiService = ApiClient.getClient();
 
     @Override
-    public Observable<TranslationAnswer> translateText(String toTranslate) {
+    public Observable<TranslationAnswerDTO> translateText(String toTranslate) {
         Map<String, String> map = new HashMap<>();
         map.put(ApiClient.PARAM_TEXT, toTranslate);
         map.put(ApiClient.PARAM_LANG, "ru");

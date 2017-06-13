@@ -1,7 +1,6 @@
 package com.dmitry.kartsev.yandextranslatetool.model.rest;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.squareup.okhttp.Interceptor;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
@@ -24,12 +23,25 @@ public class ApiClient {
     public static final String PARAM_KEY = "key";
     public static final String PARAM_TEXT = "text";
     public static final String PARAM_LANG = "lang";
+    public static final String PARAM_LANG_KEY = "ui";
     public static final int ANSWER_CODE_OK = 200;
     private static final boolean ENABLE_AUTH = false;
     private static final String AUTH_64 = "***"; //your code here
     private static Retrofit retrofit = null;
 
     public static ApiInterface getClient() {
+
+        Retrofit.Builder builder = new Retrofit.Builder().
+                baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create());
+        if (ENABLE_AUTH) builder.client(initOkHttp());
+
+        ApiInterface apiInterface = builder.build().create(ApiInterface.class);
+        return apiInterface;
+    }
+
+    private static OkHttpClient initOkHttp() {
         OkHttpClient httpClient = new OkHttpClient();
         httpClient.interceptors().add(new Interceptor() {
             @Override
@@ -44,13 +56,17 @@ public class ApiClient {
             }
         });
 
+        return httpClient;
+    }
+
+    public static ApiInterface getClient(Gson gson) {
         Retrofit.Builder builder = new Retrofit.Builder().
                 baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create());
-        if (ENABLE_AUTH) builder.client(httpClient);
+        if (ENABLE_AUTH) builder.client(initOkHttp());
 
-        ApiInterface apiInterface = builder.build().create(ApiInterface.class);
-        return apiInterface;
+        ApiInterface apiInterface;
+        return apiInterface = builder.build().create(ApiInterface.class);
     }
 }

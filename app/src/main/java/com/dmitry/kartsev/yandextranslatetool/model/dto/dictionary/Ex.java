@@ -1,20 +1,17 @@
-package com.dmitry.kartsev.yandextranslatetool.model.pojo.dictionary;
+package com.dmitry.kartsev.yandextranslatetool.model.dto.dictionary;
 
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Def {
+public class Ex {
 
     @SerializedName("text")
     @Expose
     private String text;
-    @SerializedName("pos")
-    @Expose
-    private String pos;
     @SerializedName("tr")
     @Expose
-    private List<Tr> tr = null;
+    private List<Tr_> tr = null;
 
     public String getText() {
         return text;
@@ -24,19 +21,11 @@ public class Def {
         this.text = text;
     }
 
-    public String getPos() {
-        return pos;
-    }
-
-    public void setPos(String pos) {
-        this.pos = pos;
-    }
-
-    public List<Tr> getTr() {
+    public List<Tr_> getTr() {
         return tr;
     }
 
-    public void setTr(List<Tr> tr) {
+    public void setTr(List<Tr_> tr) {
         this.tr = tr;
     }
 

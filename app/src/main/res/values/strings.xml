@@ -6,4 +6,6 @@
     <string name="error_something_went_wrong">Something went wrong. Please try again or write to author.</string>
     <!-- messages -->
     <string name="message_no_translation">Text do not have translation</string>
+    <!-- symbols -->
+    <string name="direction_symbol">-></string>
 </resources>

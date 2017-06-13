@@ -1,8 +1,6 @@
 package com.dmitry.kartsev.yandextranslatetool.model;
 
-import com.dmitry.kartsev.yandextranslatetool.model.pojo.TranslationAnswer;
-
-import java.util.List;
+import com.dmitry.kartsev.yandextranslatetool.model.dto.TranslationAnswerDTO;
 
 import rx.Observable;
 
@@ -11,5 +9,5 @@ import rx.Observable;
  */
 
 public interface ITranslation {
-    Observable<TranslationAnswer> translateText(String languageFrom);
+    Observable<TranslationAnswerDTO> translateText(String languageFrom);
 }

@@ -1,6 +1,7 @@
 package com.dmitry.kartsev.yandextranslatetool.view;
 
-import com.dmitry.kartsev.yandextranslatetool.model.pojo.TranslationAnswer;
+import com.dmitry.kartsev.yandextranslatetool.model.dto.TranslationAnswerDTO;
+import com.dmitry.kartsev.yandextranslatetool.presenter.vo.Languages;
 
 import java.util.List;
 
@@ -11,7 +12,8 @@ import java.util.List;
 public interface IView {
     String getTextToTranslate();
     String getSelectedLanguage();
+    void setLanguagesList(Languages languages);
     void showError(String errMessage);
-    void showTranslation(TranslationAnswer answer);
+    void showTranslation(TranslationAnswerDTO answer);
     void showEmptyTranslation();
 }

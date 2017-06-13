@@ -1,4 +1,4 @@
-package com.dmitry.kartsev.yandextranslatetool.model.pojo.dictionary;
+package com.dmitry.kartsev.yandextranslatetool.model.dto.dictionary;
 
 import java.util.List;
 import com.google.gson.annotations.Expose;

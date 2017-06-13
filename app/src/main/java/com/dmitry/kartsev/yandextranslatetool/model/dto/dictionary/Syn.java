@@ -1,9 +1,9 @@
-package com.dmitry.kartsev.yandextranslatetool.model.pojo.dictionary;
+package com.dmitry.kartsev.yandextranslatetool.model.dto.dictionary;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Tr_ {
+public class Syn {
 
     @SerializedName("text")
     @Expose
