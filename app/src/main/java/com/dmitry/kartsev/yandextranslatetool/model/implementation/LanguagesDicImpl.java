@@ -21,11 +21,11 @@ import rx.schedulers.Schedulers;
  */
 
 public class LanguagesDicImpl implements ILanguagesDic {
-    GsonBuilder gsonBuilder = new GsonBuilder().registerTypeAdapter(LanguagesDicDTO.class,
+    private GsonBuilder gsonBuilder = new GsonBuilder().registerTypeAdapter(LanguagesDicDTO.class,
             new LanguageDeserealizationAdapter());
-    Gson gson = gsonBuilder.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+    private Gson gson = gsonBuilder.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
             .create();
-    ApiInterface apiService = ApiClient.getClient(gson);
+    private ApiInterface apiService = ApiClient.getClient(gson, ApiClient.BASE_URL);
 
     @Override
     public Observable<LanguagesDicDTO> getLanguagesDic(String baseLanguage) {

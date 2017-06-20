@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Yandex Translate Tool</string>
+    <string name="app_name">Переводчик Yandex</string>
     <!-- подсказки -->
-    <string name="hint_enter_word">Введите здесь слово или предложение для перевода...</string>
+    <string name="hint_enter_word">Введите здесь слово или предложение для перевода…</string>
     <!-- сообщения об ошибках -->
     <string name="error_something_went_wrong">Что-то пошло не так. Попробуйте еще раз или свяжитесь с автором.</string>
     <!-- messages -->

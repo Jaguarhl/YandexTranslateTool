@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- margins & paddings for text to translate edit text -->
     <dimen name="offset">16dp</dimen>
+    <dimen name="icon_size">15dp</dimen>
+    <dimen name="btn_margin">5dp</dimen>
+    <dimen name="text_to_translate_padding">7dp</dimen>
+    <!-- fonts sizes -->
+    <dimen name="text_to_translate">16sp</dimen>
 </resources>

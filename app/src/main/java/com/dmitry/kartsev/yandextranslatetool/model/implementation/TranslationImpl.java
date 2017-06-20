@@ -21,7 +21,7 @@ import rx.schedulers.Schedulers;
 public class TranslationImpl implements ITranslation {
 
     public static final String LOG_TAG = "TranslationImpl";
-    ApiInterface apiService = ApiClient.getClient();
+    ApiInterface apiService = ApiClient.getClient(ApiClient.BASE_URL);
 
     @Override
     public Observable<TranslationAnswerDTO> translateText(String toTranslate) {

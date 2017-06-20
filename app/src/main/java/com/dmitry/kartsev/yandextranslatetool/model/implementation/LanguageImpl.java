@@ -17,7 +17,7 @@ import rx.schedulers.Schedulers;
  */
 
 public class LanguageImpl implements ILanguage {
-    ApiInterface apiService = ApiClient.getClient();
+    private ApiInterface apiService = ApiClient.getClient(ApiClient.BASE_URL);
 
     @Override
     public Observable<LanguageDetectedDTO> getDetectedLanguage(String textToDetect) {
